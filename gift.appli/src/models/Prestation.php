@@ -8,6 +8,7 @@ class Prestation extends Model
 {
     protected $table = 'prestation';
     protected $primaryKey = 'id';
+    protected $keyType = 'string';
     public $timestamps = false;
 
     public function categorie()

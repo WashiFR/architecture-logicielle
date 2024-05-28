@@ -1,0 +1,10 @@
+{% extends 'SkeletonView.twig' %}
+
+{% block content %}
+    <h1>Liste des Catégories</h1>
+    <ul>
+        {% for categorie in categories %}
+            <li><a href="{{ categorie.url }}">{{ categorie.id }} : {{ categorie.libelle }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

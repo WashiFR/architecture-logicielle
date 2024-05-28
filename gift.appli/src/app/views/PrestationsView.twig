@@ -1,0 +1,10 @@
+{% extends 'SkeletonView.twig' %}
+
+{% block content %}
+    <h1>Liste des Prestations</h1>
+    <ul>
+        {% for prestation in prestations %}
+            <li><a href="{{ prestation.url }}">{{ prestation.libelle }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

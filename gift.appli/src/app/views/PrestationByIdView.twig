@@ -1,0 +1,13 @@
+{% extends 'SkeletonView.twig' %}
+
+{% block content %}
+    {% for prestation in prestations %}
+        <h1>Prestation : {{ prestation.libelle }}</h1>
+        <p>{{ prestation.description }}</p>
+        <ul>
+            <li>Unite : {{ prestation.unite }}</li>
+            <li>Tarif : {{ prestation.tarif }}€</li>
+        </ul>
+        <img src="../src/img/{{ prestation.img }}">
+    {% endfor %}
+{% endblock %}

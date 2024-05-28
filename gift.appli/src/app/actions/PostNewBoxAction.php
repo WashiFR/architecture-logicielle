@@ -6,6 +6,7 @@ use gift\appli\app\actions\AbstractAction;
 use gift\appli\models\Box;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Views\Twig;
 
 class PostNewBoxAction extends AbstractAction
 {
@@ -23,12 +24,7 @@ class PostNewBoxAction extends AbstractAction
         $box->montant = $montant;
         $box->save();
 
-        $html = <<<HTML
-            <h1>Box créée</h1>
-            <p>La box $libelle a bien été créée</p>
-        HTML;
-
-        $response->getBody()->write($html);
-        return $response;
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'NewBoxCreatedView.twig', ['box' => $box]);
     }
 }

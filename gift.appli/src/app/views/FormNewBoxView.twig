@@ -1,0 +1,14 @@
+{% extends 'SkeletonView.twig' %}
+
+{% block content %}
+    <h1>Créer une nouvelle Box</h1>
+    <form action="../box/create" method="post">
+        <label for="libelle">Libellé</label>
+        <input type="text" name="libelle" id="libelle">
+        <label for="description">Description</label>
+        <textarea name="description" id="description"></textarea>
+        <label for="montant">Montant</label>
+        <input type="number" name="montant" id="montant">
+        <button type="submit">Créer</button>
+    </form>
+{% endblock %}

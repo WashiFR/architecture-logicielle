@@ -8,6 +8,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
+use Slim\Routing\RouteContext;
+use Slim\Views\Twig;
 
 class GetCategorieByIdAction extends AbstractAction
 {
@@ -18,32 +20,20 @@ class GetCategorieByIdAction extends AbstractAction
 
         if (empty($id)) throw new HttpBadRequestException($request, 'Erreur 400 : Aucune catégorie sélectionnée');
 
-        $sql = Categorie::select('id', 'description')->where('id', $id)->get();
+        $sql = Categorie::select('id', 'libelle', 'description')->where('id', $id)->get();
 
         if ($sql->isEmpty()) throw new HttpNotFoundException($request, 'Erreur 404 : Aucune catégorie trouvée');
 
-        $html = '';
+        $view = Twig::fromRequest($request);
+        $routeContext = RouteContext::fromRequest($request);
 
+        $routeParser = $routeContext->getRouteParser();
         foreach ($sql as $categorie) {
-            $html .= <<<HTML
-                <h1>Catégories $categorie->id</h1>
-                <p>$categorie->description</p>
-                <ul>
-            HTML;
             foreach ($categorie->prestations as $prestation) {
-                $html .= <<<HTML
-                    <li>Prestation $prestation->id</li>
-                    <ul>
-                        <li>$prestation->libelle</li>
-                        <li>$prestation->tarif</li>
-                        <li>$prestation->unite</li>
-                    </ul>
-                HTML;
+                $prestation->url = $routeParser->urlFor('prestation', [], ['id' => $prestation->id]);
             }
-            $html .= '</ul>';
         }
 
-        $response->getBody()->write($html);
-        return $response;
+        return $view->render($response, 'CategorieByIdView.twig', ['categories' => $sql]);
     }
 }
