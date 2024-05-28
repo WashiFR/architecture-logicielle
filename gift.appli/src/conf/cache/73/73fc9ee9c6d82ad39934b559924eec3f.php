@@ -70,8 +70,10 @@ class __TwigTemplate_cef3efd1481f848604596a644d933474 extends Template
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["prestation"], "tarif", [], "any", false, false, false, 9), "html", null, true);
             yield "€</li>
         </ul>
-        <img src=\"../src/img/";
+        <img src=\"";
             // line 11
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["globals"] ?? null), "img_dir", [], "any", false, false, false, 11), "html", null, true);
+            yield "/";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["prestation"], "img", [], "any", false, false, false, 11), "html", null, true);
             yield "\">
     ";

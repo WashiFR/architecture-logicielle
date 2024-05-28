@@ -14,6 +14,10 @@ $twig = Twig::create(__DIR__ . '/../app/views', [
     'auto_reload' => true
 ]);
 
+$twig->getEnvironment()->addGlobal('globals', [
+    'img_dir' => '../src/img/'
+]);
+
 $app->add(TwigMiddleware::create($app, $twig));
 
 $app->addRoutingMiddleware();

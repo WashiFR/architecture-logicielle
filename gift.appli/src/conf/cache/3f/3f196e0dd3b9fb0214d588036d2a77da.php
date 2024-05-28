@@ -13,8 +13,8 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* SkeletonView.twig */
-class __TwigTemplate_f223e21c194f11c8afc7460d911f2ad6 extends Template
+/* HomeView.twig */
+class __TwigTemplate_6ba22d78b4770e1f519168cc67a1e968 extends Template
 {
     private $source;
     private $macros = [];
@@ -25,41 +25,31 @@ class __TwigTemplate_f223e21c194f11c8afc7460d911f2ad6 extends Template
 
         $this->source = $this->getSourceContext();
 
-        $this->parent = false;
-
         $this->blocks = [
             'content' => [$this, 'block_content'],
         ];
     }
 
+    protected function doGetParent(array $context)
+    {
+        // line 1
+        return "SkeletonView.twig";
+    }
+
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 1
-        yield from         $this->loadTemplate("HeaderView.twig", "SkeletonView.twig", 1)->unwrap()->yield($context);
-        // line 2
-        yield "
-<hr>
-
-<main>
-    ";
-        // line 6
-        yield from $this->unwrap()->yieldBlock('content', $context, $blocks);
-        // line 7
-        yield "</main>
-
-<hr>
-
-";
-        // line 11
-        yield from         $this->loadTemplate("FooterView.twig", "SkeletonView.twig", 11)->unwrap()->yield($context);
-        return; yield '';
+        $this->parent = $this->loadTemplate("SkeletonView.twig", "HomeView.twig", 1);
+        yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
     }
 
-    // line 6
+    // line 3
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
+        yield "    <h1>Accueil</h1>
+    <p>Bienvenue sur la page d'accueil de l'application</p>
+";
         return; yield '';
     }
 
@@ -68,7 +58,7 @@ class __TwigTemplate_f223e21c194f11c8afc7460d911f2ad6 extends Template
      */
     public function getTemplateName()
     {
-        return "SkeletonView.twig";
+        return "HomeView.twig";
     }
 
     /**
@@ -84,11 +74,11 @@ class __TwigTemplate_f223e21c194f11c8afc7460d911f2ad6 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  60 => 6,  55 => 11,  49 => 7,  47 => 6,  41 => 2,  39 => 1,);
+        return array (  47 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("", "SkeletonView.twig", "C:\\wamp64\\www\\gift.appli\\src\\app\\views\\SkeletonView.twig");
+        return new Source("", "HomeView.twig", "C:\\wamp64\\www\\gift.appli\\src\\app\\views\\HomeView.twig");
     }
 }

@@ -1,13 +1,4 @@
-<header>
-    <h1>Gift Appli</h1>
-    <nav>
-        <ul>
-            <li><a href={{ url_for('categories') }}>Catégories</a></li>
-            <li><a href={{ url_for('prestations') }}>Prestations</a></li>
-            <li><a href={{ url_for('box.create') }}>Créer Box</a></li>
-        </ul>
-    </nav>
-</header>
+{% include 'HeaderView.twig' %}
 
 <hr>
 
@@ -17,6 +8,4 @@
 
 <hr>
 
-<footer>
-    <p>JEANDIDIER Clément - SZEZCPANSKI Gaëtan - WEIER Loris</p>
-</footer>
+{% include 'FooterView.twig' %}

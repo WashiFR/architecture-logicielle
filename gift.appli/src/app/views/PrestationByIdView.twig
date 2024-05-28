@@ -8,6 +8,6 @@
             <li>Unite : {{ prestation.unite }}</li>
             <li>Tarif : {{ prestation.tarif }}€</li>
         </ul>
-        <img src="../src/img/{{ prestation.img }}">
+        <img src="{{ globals.img_dir }}/{{ prestation.img }}">
     {% endfor %}
 {% endblock %}
