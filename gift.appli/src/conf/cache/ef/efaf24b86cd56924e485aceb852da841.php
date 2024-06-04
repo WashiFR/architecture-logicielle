@@ -14,7 +14,7 @@ use Twig\Source;
 use Twig\Template;
 
 /* HeaderView.twig */
-class __TwigTemplate_888c25040d7f4519c6d74b839be6a5de extends Template
+class __TwigTemplate_01ee2221382ef0a0db122ab38f50e76a extends Template
 {
     private $source;
     private $macros = [];
@@ -53,10 +53,6 @@ class __TwigTemplate_888c25040d7f4519c6d74b839be6a5de extends Template
         yield ">Prestations</a></li>
             <li><a href=";
         // line 8
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("categories.create"), "html", null, true);
-        yield ">Créer Catégorie</a></li>
-            <li><a href=";
-        // line 9
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("box.create"), "html", null, true);
         yield ">Créer Box</a></li>
         </ul>
@@ -86,7 +82,7 @@ class __TwigTemplate_888c25040d7f4519c6d74b839be6a5de extends Template
      */
     public function getDebugInfo()
     {
-        return array (  60 => 9,  56 => 8,  52 => 7,  48 => 6,  44 => 5,  38 => 1,);
+        return array (  56 => 8,  52 => 7,  48 => 6,  44 => 5,  38 => 1,);
     }
 
     public function getSourceContext()

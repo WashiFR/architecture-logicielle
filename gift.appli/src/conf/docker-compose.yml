@@ -3,7 +3,7 @@ services:
     image: gaetan267/giftbox_image:latest
     container_name: php-container
     ports:
-      - "8080:80"
+      - "14100:80"
     depends_on:
       - sql
 
@@ -16,12 +16,14 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     ports:
-      - "5080:3306"
+      - "14101:3306"
 
   adminer:
     image: adminer:latest
+    command:
+      - php -S 0.0.0.0:8080 -t /var/www/html
     container_name: adminer-container
     ports:
-      - "8081:8080"
+      - "14102:8080"
     depends_on:
       - sql

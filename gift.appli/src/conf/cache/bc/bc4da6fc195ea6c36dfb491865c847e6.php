@@ -13,8 +13,8 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* FormNewBoxView.twig */
-class __TwigTemplate_f1ecdc28ce99f14ba0d69b9d671e9583 extends Template
+/* HomeView.twig */
+class __TwigTemplate_99c9f9a7e28fb0cdc425e00df0491c71 extends Template
 {
     private $source;
     private $macros = [];
@@ -39,7 +39,7 @@ class __TwigTemplate_f1ecdc28ce99f14ba0d69b9d671e9583 extends Template
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
-        $this->parent = $this->loadTemplate("SkeletonView.twig", "FormNewBoxView.twig", 1);
+        $this->parent = $this->loadTemplate("SkeletonView.twig", "HomeView.twig", 1);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
     }
 
@@ -47,20 +47,8 @@ class __TwigTemplate_f1ecdc28ce99f14ba0d69b9d671e9583 extends Template
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 4
-        yield "    <h1>Créer une nouvelle Box</h1>
-    <form action=\"";
-        // line 5
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("box.create"), "html", null, true);
-        yield "\" method=\"post\">
-        <label for=\"libelle\">Libellé</label>
-        <input type=\"text\" name=\"libelle\" id=\"libelle\">
-        <label for=\"description\">Description</label>
-        <textarea name=\"description\" id=\"description\"></textarea>
-        <label for=\"montant\">Montant</label>
-        <input type=\"number\" name=\"montant\" id=\"montant\">
-        <button type=\"submit\">Créer</button>
-    </form>
+        yield "    <h1>Accueil</h1>
+    <p>Bienvenue sur la page d'accueil de l'application</p>
 ";
         return; yield '';
     }
@@ -70,7 +58,7 @@ class __TwigTemplate_f1ecdc28ce99f14ba0d69b9d671e9583 extends Template
      */
     public function getTemplateName()
     {
-        return "FormNewBoxView.twig";
+        return "HomeView.twig";
     }
 
     /**
@@ -86,11 +74,11 @@ class __TwigTemplate_f1ecdc28ce99f14ba0d69b9d671e9583 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  54 => 5,  51 => 4,  47 => 3,  36 => 1,);
+        return array (  47 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("", "FormNewBoxView.twig", "C:\\wamp64\\www\\gift.appli\\src\\app\\views\\FormNewBoxView.twig");
+        return new Source("", "HomeView.twig", "C:\\wamp64\\www\\gift.appli\\src\\app\\views\\HomeView.twig");
     }
 }

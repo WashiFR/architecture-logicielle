@@ -2,7 +2,7 @@
 
 require_once '../../../src/vendor/autoload.php';
 
-use gift\appli\models\Categorie;
+use gift\appli\core\domain\Categorie;
 use Illuminate\Database\Capsule\Manager as DB;
 
 $db = new DB();

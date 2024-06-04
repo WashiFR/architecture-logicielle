@@ -13,8 +13,8 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* FormNewBoxView.twig */
-class __TwigTemplate_f1ecdc28ce99f14ba0d69b9d671e9583 extends Template
+/* NewCategorieCreatedView.twig */
+class __TwigTemplate_938658f414d8a1e983e35569339211f9 extends Template
 {
     private $source;
     private $macros = [];
@@ -39,7 +39,7 @@ class __TwigTemplate_f1ecdc28ce99f14ba0d69b9d671e9583 extends Template
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
-        $this->parent = $this->loadTemplate("SkeletonView.twig", "FormNewBoxView.twig", 1);
+        $this->parent = $this->loadTemplate("SkeletonView.twig", "NewCategorieCreatedView.twig", 1);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
     }
 
@@ -48,19 +48,11 @@ class __TwigTemplate_f1ecdc28ce99f14ba0d69b9d671e9583 extends Template
     {
         $macros = $this->macros;
         // line 4
-        yield "    <h1>Créer une nouvelle Box</h1>
-    <form action=\"";
+        yield "    <h1>Création d'une catégorie</h1>
+    <p>La catégorie ";
         // line 5
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("box.create"), "html", null, true);
-        yield "\" method=\"post\">
-        <label for=\"libelle\">Libellé</label>
-        <input type=\"text\" name=\"libelle\" id=\"libelle\">
-        <label for=\"description\">Description</label>
-        <textarea name=\"description\" id=\"description\"></textarea>
-        <label for=\"montant\">Montant</label>
-        <input type=\"number\" name=\"montant\" id=\"montant\">
-        <button type=\"submit\">Créer</button>
-    </form>
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["categorie"] ?? null), "libelle", [], "any", false, false, false, 5), "html", null, true);
+        yield " a bien été créée</p>
 ";
         return; yield '';
     }
@@ -70,7 +62,7 @@ class __TwigTemplate_f1ecdc28ce99f14ba0d69b9d671e9583 extends Template
      */
     public function getTemplateName()
     {
-        return "FormNewBoxView.twig";
+        return "NewCategorieCreatedView.twig";
     }
 
     /**
@@ -91,6 +83,6 @@ class __TwigTemplate_f1ecdc28ce99f14ba0d69b9d671e9583 extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "FormNewBoxView.twig", "C:\\wamp64\\www\\gift.appli\\src\\app\\views\\FormNewBoxView.twig");
+        return new Source("", "NewCategorieCreatedView.twig", "C:\\wamp64\\www\\gift.appli\\src\\app\\views\\NewCategorieCreatedView.twig");
     }
 }

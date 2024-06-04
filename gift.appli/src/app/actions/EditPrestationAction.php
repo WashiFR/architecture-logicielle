@@ -2,7 +2,7 @@
 
 namespace gift\appli\app\actions;
 
-use gift\appli\core\domain\Prestation;
+use gift\appli\app\actions\AbstractAction;
 use gift\appli\core\services\CatalogueService;
 use gift\appli\core\services\CatalogueServiceNotFoundException;
 use gift\appli\core\services\ICatalogueService;
@@ -13,14 +13,14 @@ use Slim\Exception\HttpNotFoundException;
 use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 
-class GetPrestationByIdAction extends AbstractAction
+class EditPrestationAction extends AbstractAction
 {
     private string $template;
     private ICatalogueService $catalogueService;
 
     public function __construct()
     {
-        $this->template = 'PrestationByIdView.twig';
+        $this->template = 'EditPrestationView.twig';
         $this->catalogueService = new CatalogueService();
     }
 
@@ -33,7 +33,7 @@ class GetPrestationByIdAction extends AbstractAction
 
         try {
             $sql = $this->catalogueService->getPrestationById($id);
-            $categ = $this->catalogueService->getCategorieById($sql[0]['cat_id']);
+            $categories = $this->catalogueService->getCategories();
         } catch (CatalogueServiceNotFoundException $e) {
             throw new HttpNotFoundException($request, $e->getMessage());
         }
@@ -41,16 +41,15 @@ class GetPrestationByIdAction extends AbstractAction
         $routeContext = RouteContext::fromRequest($request);
 
         $routeParser = $routeContext->getRouteParser();
-        for ($i = 0; $i < count($categ); $i++) {
-            $categ[$i]['url'] = $routeParser->urlFor('categorie', ['id' => $categ[$i]['id']]);
+        for ($i = 0; $i < count($sql); $i++) {
             $edit[$i]['url'] = $routeParser->urlFor('prestation.edit', [], ['id' => $sql[$i]['id']]);
         }
 
-        $views = Twig::fromRequest($request);
-        return $views->render($response, $this->template, [
-            'prestations' => $sql,
-            'categorie' => $categ[0],
-            'edit' => $edit[0]
+        $view = Twig::fromRequest($request);
+        return $view->render($response, $this->template, [
+            'prestation' => $sql[0],
+            'edit' => $edit[0],
+            'categories' => $categories
         ]);
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
+use gift\appli\infrastructure\Eloquent;
 use Slim\Factory\AppFactory;
-use \gift\appli\app\utils\Eloquent;
-use \Slim\Views\Twig;
-use \Slim\Views\TwigMiddleware;
+use Slim\Views\Twig;
+use Slim\Views\TwigMiddleware;
 
 $app = AppFactory::create();
 Eloquent::init(__DIR__ . '/conf.ini');
