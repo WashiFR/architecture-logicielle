@@ -2,44 +2,44 @@
 
 namespace gift\appli\app\actions;
 
-use gift\appli\app\actions\AbstractAction;
-use gift\appli\core\services\CatalogueService;
-use gift\appli\core\services\CatalogueServiceNotFoundException;
-use gift\appli\core\services\ICatalogueService;
+use gift\appli\app\utils\CsrfException;
+use gift\appli\app\utils\CsrfService;
+use gift\appli\core\services\catalogue\CatalogueService;
+use gift\appli\core\services\catalogue\ICatalogueService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\Exception\HttpNotFoundException;
-use Slim\Views\Twig;
+use Slim\Exception\HttpBadRequestException;
+use Slim\Routing\RouteContext;
 
 class PostNewCategorieAction extends AbstractAction
 {
-    private string $template;
     private ICatalogueService $catalogueService;
 
     public function __construct()
     {
-        $this->template = 'NewCategorieCreatedView.twig';
         $this->catalogueService = new CatalogueService();
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $data = $request->getParsedBody();
+
+        try {
+            CsrfService::check($data['csrf']);
+        } catch (CsrfException $e) {
+            throw new HttpBadRequestException($request, $e->getMessage());
+        }
+
         $libelle = $data['libelle'] ?? null;
         $description = $data['description'] ?? null;
 
-        $categ_id = $this->catalogueService->createCategorie([
+        $this->catalogueService->createCategorie([
             'libelle' => $libelle,
             'description' => $description
         ]);
 
-        try {
-            $categ = $this->catalogueService->getCategorieById($categ_id);
-        } catch (CatalogueServiceNotFoundException $e) {
-            throw new HttpNotFoundException($request, $e->getMessage());
-        }
-
-        $view = Twig::fromRequest($request);
-        return $view->render($response, $this->template, ['categorie' => $categ[0]]);
+        $routeContext = RouteContext::fromRequest($request);
+        $url = $routeContext->getRouteParser()->urlFor('categories');
+        return $response->withStatus(302)->withHeader('Location', $url);
     }
 }

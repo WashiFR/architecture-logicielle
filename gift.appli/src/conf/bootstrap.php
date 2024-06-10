@@ -5,6 +5,8 @@ use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
 
+session_start();
+
 $app = AppFactory::create();
 Eloquent::init(__DIR__ . '/conf.ini');
 
@@ -15,7 +17,8 @@ $twig = Twig::create(__DIR__ . '/../app/views', [
 ]);
 
 $twig->getEnvironment()->addGlobal('globals', [
-    'img_dir' => '../src/img/'
+    'img_dir' => '../src/img/',
+    'user_role' => $_SESSION['user_role'] ?? null
 ]);
 
 $app->add(TwigMiddleware::create($app, $twig));

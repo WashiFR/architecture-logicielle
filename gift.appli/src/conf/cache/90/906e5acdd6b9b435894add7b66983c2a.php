@@ -96,6 +96,10 @@ class __TwigTemplate_7853c1394ebe28adc5bfb29405a32522 extends Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 19
         yield "        </select>
+        <input type=\"hidden\" name=\"csrf\" value=\"";
+        // line 20
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["csrf"] ?? null), "html", null, true);
+        yield "\">
         <button type=\"submit\">Modifier</button>
     </form>
 ";
@@ -123,7 +127,7 @@ class __TwigTemplate_7853c1394ebe28adc5bfb29405a32522 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  98 => 19,  83 => 17,  79 => 16,  73 => 13,  67 => 10,  61 => 7,  56 => 5,  51 => 4,  47 => 3,  36 => 1,);
+        return array (  101 => 20,  98 => 19,  83 => 17,  79 => 16,  73 => 13,  67 => 10,  61 => 7,  56 => 5,  51 => 4,  47 => 3,  36 => 1,);
     }
 
     public function getSourceContext()

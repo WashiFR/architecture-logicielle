@@ -57,8 +57,12 @@ class __TwigTemplate_f1ecdc28ce99f14ba0d69b9d671e9583 extends Template
         <input type=\"text\" name=\"libelle\" id=\"libelle\">
         <label for=\"description\">Description</label>
         <textarea name=\"description\" id=\"description\"></textarea>
-        <label for=\"montant\">Montant</label>
-        <input type=\"number\" name=\"montant\" id=\"montant\">
+        <label for=\"message_kdo\">Message KDO</label>
+        <textarea name=\"message_kdo\" id=\"message_kdo\"></textarea>
+        <input type=\"hidden\" name=\"csrf\" value=\"";
+        // line 12
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["csrf"] ?? null), "html", null, true);
+        yield "\">
         <button type=\"submit\">Créer</button>
     </form>
 ";
@@ -86,7 +90,7 @@ class __TwigTemplate_f1ecdc28ce99f14ba0d69b9d671e9583 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  54 => 5,  51 => 4,  47 => 3,  36 => 1,);
+        return array (  64 => 12,  54 => 5,  51 => 4,  47 => 3,  36 => 1,);
     }
 
     public function getSourceContext()

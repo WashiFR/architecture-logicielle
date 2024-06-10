@@ -13,8 +13,8 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* FormNewCategorieView.twig */
-class __TwigTemplate_6e5be28b71340acf41a13dfc7c925409 extends Template
+/* FormSignupView.twig */
+class __TwigTemplate_55c7fb7dcb96a748e6eaaf5682217c96 extends Template
 {
     private $source;
     private $macros = [];
@@ -39,7 +39,7 @@ class __TwigTemplate_6e5be28b71340acf41a13dfc7c925409 extends Template
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
-        $this->parent = $this->loadTemplate("SkeletonView.twig", "FormNewCategorieView.twig", 1);
+        $this->parent = $this->loadTemplate("SkeletonView.twig", "FormSignupView.twig", 1);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
     }
 
@@ -48,20 +48,25 @@ class __TwigTemplate_6e5be28b71340acf41a13dfc7c925409 extends Template
     {
         $macros = $this->macros;
         // line 4
-        yield "    <h1>Créer une nouvelle catégorie</h1>
+        yield "    <h1>Inscription</h1>
     <form action=\"";
         // line 5
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("categories.create"), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("signup"), "html", null, true);
         yield "\" method=\"post\">
-        <label for=\"libelle\">Libellé</label>
-        <input type=\"text\" name=\"libelle\" id=\"libelle\">
-        <label for=\"description\">Description</label>
-        <textarea name=\"description\" id=\"description\"></textarea>
+        <label for=\"email\">Email</label>
+        <input type=\"email\" name=\"email\" id=\"email\">
+        <label for=\"password\">Mot de passe</label>
+        <input type=\"password\" name=\"password\" id=\"password\">
         <input type=\"hidden\" name=\"csrf\" value=\"";
         // line 10
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["csrf"] ?? null), "html", null, true);
         yield "\">
-        <button type=\"submit\">Créer</button>
+        <button type=\"submit\">S'inscrire</button>
+        <br>
+        <a href=\"";
+        // line 13
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("signin"), "html", null, true);
+        yield "\">Déjà inscrit ?</a>
     </form>
 ";
         return; yield '';
@@ -72,7 +77,7 @@ class __TwigTemplate_6e5be28b71340acf41a13dfc7c925409 extends Template
      */
     public function getTemplateName()
     {
-        return "FormNewCategorieView.twig";
+        return "FormSignupView.twig";
     }
 
     /**
@@ -88,11 +93,11 @@ class __TwigTemplate_6e5be28b71340acf41a13dfc7c925409 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  62 => 10,  54 => 5,  51 => 4,  47 => 3,  36 => 1,);
+        return array (  68 => 13,  62 => 10,  54 => 5,  51 => 4,  47 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("", "FormNewCategorieView.twig", "C:\\wamp64\\www\\gift.appli\\src\\app\\views\\FormNewCategorieView.twig");
+        return new Source("", "FormSignupView.twig", "C:\\wamp64\\www\\gift.appli\\src\\app\\views\\FormSignupView.twig");
     }
 }

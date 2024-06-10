@@ -2,22 +2,24 @@
 
 namespace gift\appli\app\actions;
 
+use gift\appli\app\actions\AbstractAction;
 use gift\appli\app\utils\CsrfException;
 use gift\appli\app\utils\CsrfService;
-use gift\appli\core\services\box\BoxService;
-use gift\appli\core\services\box\IBoxService;
+use gift\appli\core\domain\User;
+use gift\appli\core\services\auth\AuthService;
+use gift\appli\core\services\auth\IAuthService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Routing\RouteContext;
 
-class PostNewBoxAction extends AbstractAction
+class PostSigninAction extends AbstractAction
 {
-    private IBoxService $boxService;
+    private IAuthService $authService;
 
     public function __construct()
     {
-        $this->boxService = new BoxService();
+        $this->authService = new AuthService();
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -30,19 +32,10 @@ class PostNewBoxAction extends AbstractAction
             throw new HttpBadRequestException($request, $e->getMessage());
         }
 
-        $token = $data['csrf'] ?? null;
-        $libelle = $data['libelle'] ?? null;
-        $description = $data['description'] ?? null;
-        $message_kdo = $data['message_kdo'] ?? null;
+        $email = $data['email'] ?? null;
+        $password = $data['password'] ?? null;
 
-        $box_id = $this->boxService->createBox([
-            'token' => $token,
-            'libelle' => $libelle,
-            'description' => $description,
-            'message_kdo' => $message_kdo
-        ]);
-
-        $_SESSION['box_id'] = $box_id;
+        $this->authService->signin($email, $password);
 
         $routeContext = RouteContext::fromRequest($request);
         $url = $routeContext->getRouteParser()->urlFor('categories');

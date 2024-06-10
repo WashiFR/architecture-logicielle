@@ -56,35 +56,59 @@ class __TwigTemplate_cef3efd1481f848604596a644d933474 extends Template
             yield "        <h1>Prestation : ";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["prestation"], "libelle", [], "any", false, false, false, 5), "html", null, true);
             yield "</h1>
-        <p><a href=\"";
+        ";
             // line 6
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["edit"] ?? null), "url", [], "any", false, false, false, 6), "html", null, true);
-            yield "\">Modifier</a></p>
-        <p>";
-            // line 7
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["prestation"], "description", [], "any", false, false, false, 7), "html", null, true);
+            if ((CoreExtension::getAttribute($this->env, $this->source, ($context["globals"] ?? null), "user_role", [], "any", false, false, false, 6) == 100)) {
+                // line 7
+                yield "            <p><a href=\"";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["edit"] ?? null), "url", [], "any", false, false, false, 7), "html", null, true);
+                yield "\">Modifier</a></p>
+        ";
+            }
+            // line 9
+            yield "        <p>";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["prestation"], "description", [], "any", false, false, false, 9), "html", null, true);
             yield "</p>
         <ul>
             <li>Unite : ";
-            // line 9
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["prestation"], "unite", [], "any", false, false, false, 9), "html", null, true);
+            // line 11
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["prestation"], "unite", [], "any", false, false, false, 11), "html", null, true);
             yield "</li>
             <li>Tarif : ";
-            // line 10
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["prestation"], "tarif", [], "any", false, false, false, 10), "html", null, true);
+            // line 12
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["prestation"], "tarif", [], "any", false, false, false, 12), "html", null, true);
             yield "€</li>
         </ul>
         <h2>Catégorie : <a href=\"";
-            // line 12
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["categorie"] ?? null), "url", [], "any", false, false, false, 12), "html", null, true);
+            // line 14
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["categorie"] ?? null), "url", [], "any", false, false, false, 14), "html", null, true);
             yield "\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["categorie"] ?? null), "libelle", [], "any", false, false, false, 12), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["categorie"] ?? null), "libelle", [], "any", false, false, false, 14), "html", null, true);
             yield "</a></h2>
-        <img src=\"";
-            // line 13
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["globals"] ?? null), "img_dir", [], "any", false, false, false, 13), "html", null, true);
+        ";
+            // line 15
+            if ((($context["box_id"] ?? null) != null)) {
+                // line 16
+                yield "            <form action=\"";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("prestation.addToBox"), "html", null, true);
+                yield "\" method=\"post\">
+                <input type=\"hidden\" name=\"presta_id\" value=\"";
+                // line 17
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["prestation"], "id", [], "any", false, false, false, 17), "html", null, true);
+                yield "\">
+                <input type=\"hidden\" name=\"box_id\" value=\"";
+                // line 18
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["box_id"] ?? null), "html", null, true);
+                yield "\">
+                <button type=\"submit\">Ajouter à la box</button>
+            </form>
+        ";
+            }
+            // line 22
+            yield "        <img src=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, ($context["globals"] ?? null), "img_dir", [], "any", false, false, false, 22), "html", null, true);
             yield "/";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["prestation"], "img", [], "any", false, false, false, 13), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["prestation"], "img", [], "any", false, false, false, 22), "html", null, true);
             yield "\">
     ";
         }
@@ -115,7 +139,7 @@ class __TwigTemplate_cef3efd1481f848604596a644d933474 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  85 => 13,  79 => 12,  74 => 10,  70 => 9,  65 => 7,  61 => 6,  56 => 5,  51 => 4,  47 => 3,  36 => 1,);
+        return array (  108 => 22,  101 => 18,  97 => 17,  92 => 16,  90 => 15,  84 => 14,  79 => 12,  75 => 11,  69 => 9,  63 => 7,  61 => 6,  56 => 5,  51 => 4,  47 => 3,  36 => 1,);
     }
 
     public function getSourceContext()

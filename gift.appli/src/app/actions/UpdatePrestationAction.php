@@ -2,22 +2,25 @@
 
 namespace gift\appli\app\actions;
 
-use gift\appli\app\actions\AbstractAction;
-use gift\appli\core\services\CatalogueService;
-use gift\appli\core\services\ICatalogueService;
+use gift\appli\app\utils\CsrfException;
+use gift\appli\app\utils\CsrfService;
+use gift\appli\core\services\box\BoxService;
+use gift\appli\core\services\box\IBoxService;
+use gift\appli\core\services\catalogue\CatalogueService;
+use gift\appli\core\services\catalogue\ICatalogueService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Exception\HttpBadRequestException;
+use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 
 class UpdatePrestationAction extends AbstractAction
 {
-    private string $template;
-    private ICatalogueService $catalogueService;
+    private IBoxService $boxService;
 
     public function __construct()
     {
-        $this->template = 'UpdatePrestationView.twig';
-        $this->catalogueService = new CatalogueService();
+        $this->boxService = new BoxService();
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -26,12 +29,19 @@ class UpdatePrestationAction extends AbstractAction
         $id = $queryParams['id'] ?? null;
 
         $data = $request->getParsedBody();
+
+        try {
+            CsrfService::check($data['csrf']);
+        } catch (CsrfException $e) {
+            throw new HttpBadRequestException($request, $e->getMessage());
+        }
+
         $libelle = $data['libelle'] ?? null;
         $description = $data['description'] ?? null;
         $tarif = $data['tarif'] ?? null;
         $cat_id = $data['cat_id'] ?? null;
 
-        $this->catalogueService->updatePrestation([
+        $this->boxService->updatePrestation([
             'id' => $id,
             'libelle' => $libelle,
             'description' => $description,
@@ -39,7 +49,9 @@ class UpdatePrestationAction extends AbstractAction
             'cat_id' => $cat_id
         ]);
 
-        $view = Twig::fromRequest($request);
-        return $view->render($response, $this->template, ['prestation' => $libelle]);
+        $routeContext = RouteContext::fromRequest($request);
+        $url = $routeContext->getRouteParser()->urlFor('prestation');
+        $url = $url . '?id=' . $id;
+        return $response->withStatus(302)->withHeader('Location', $url);
     }
 }

@@ -5,8 +5,15 @@
             <li><a href={{ url_for('home') }}>Accueil</a></li>
             <li><a href={{ url_for('categories') }}>Catégories</a></li>
             <li><a href={{ url_for('prestations') }}>Prestations</a></li>
-            <li><a href={{ url_for('categories.create') }}>Créer Catégorie</a></li>
-            <li><a href={{ url_for('box.create') }}>Créer Box</a></li>
+            {% if globals.user_role == 100 %}
+                <li><a href={{ url_for('categories.create') }}>Créer Catégorie</a></li>
+                <li><a href={{ url_for('box.create') }}>Créer Box</a></li>
+            {% endif %}
+            {% if globals.user_role == null %}
+                <li><a href="{{ url_for('signin') }}">Se connecter</a></li>
+            {% else %}
+                <li><a href="{{ url_for('signout') }}">Se déconnecter</a></li>
+            {% endif %}
         </ul>
     </nav>
 </header>

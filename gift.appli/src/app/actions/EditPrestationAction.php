@@ -2,10 +2,13 @@
 
 namespace gift\appli\app\actions;
 
-use gift\appli\app\actions\AbstractAction;
-use gift\appli\core\services\CatalogueService;
-use gift\appli\core\services\CatalogueServiceNotFoundException;
-use gift\appli\core\services\ICatalogueService;
+use gift\appli\app\utils\CsrfService;
+use gift\appli\core\services\box\BoxService;
+use gift\appli\core\services\box\BoxServiceNotFoundException;
+use gift\appli\core\services\box\IBoxService;
+use gift\appli\core\services\catalogue\CatalogueService;
+use gift\appli\core\services\catalogue\CatalogueServiceNotFoundException;
+use gift\appli\core\services\catalogue\ICatalogueService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpBadRequestException;
@@ -17,11 +20,13 @@ class EditPrestationAction extends AbstractAction
 {
     private string $template;
     private ICatalogueService $catalogueService;
+    private IBoxService $boxService;
 
     public function __construct()
     {
         $this->template = 'EditPrestationView.twig';
         $this->catalogueService = new CatalogueService();
+        $this->boxService = new BoxService();
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -32,9 +37,9 @@ class EditPrestationAction extends AbstractAction
         if (empty($id)) throw new HttpBadRequestException($request, 'Erreur 400 : Aucune prestation sélectionnée');
 
         try {
-            $sql = $this->catalogueService->getPrestationById($id);
+            $sql = $this->boxService->getPrestationById($id);
             $categories = $this->catalogueService->getCategories();
-        } catch (CatalogueServiceNotFoundException $e) {
+        } catch (CatalogueServiceNotFoundException|BoxServiceNotFoundException $e) {
             throw new HttpNotFoundException($request, $e->getMessage());
         }
 
@@ -49,7 +54,8 @@ class EditPrestationAction extends AbstractAction
         return $view->render($response, $this->template, [
             'prestation' => $sql[0],
             'edit' => $edit[0],
-            'categories' => $categories
+            'categories' => $categories,
+            'csrf' => CsrfService::generate()
         ]);
     }
 }

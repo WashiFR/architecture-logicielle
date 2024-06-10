@@ -3,13 +3,22 @@
 {% block content %}
     {% for prestation in prestations %}
         <h1>Prestation : {{ prestation.libelle }}</h1>
-        <p><a href="{{ edit.url }}">Modifier</a></p>
+        {% if globals.user_role == 100 %}
+            <p><a href="{{ edit.url }}">Modifier</a></p>
+        {% endif %}
         <p>{{ prestation.description }}</p>
         <ul>
             <li>Unite : {{ prestation.unite }}</li>
             <li>Tarif : {{ prestation.tarif }}€</li>
         </ul>
         <h2>Catégorie : <a href="{{ categorie.url }}">{{ categorie.libelle }}</a></h2>
+        {% if box_id != null %}
+            <form action="{{ url_for('prestation.addToBox') }}" method="post">
+                <input type="hidden" name="presta_id" value="{{ prestation.id }}">
+                <input type="hidden" name="box_id" value="{{ box_id }}">
+                <button type="submit">Ajouter à la box</button>
+            </form>
+        {% endif %}
         <img src="{{ globals.img_dir }}/{{ prestation.img }}">
     {% endfor %}
 {% endblock %}

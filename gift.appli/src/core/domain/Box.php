@@ -13,6 +13,7 @@ class Box extends Model
     public $timestamps = false;
     public $incrementing = false;
     public $keyType = 'string';
+    public const CREATED = 1;
 
     public function prestations()
     {

@@ -1,0 +1,15 @@
+{% extends 'SkeletonView.twig' %}
+
+{% block content %}
+    <h1>Inscription</h1>
+    <form action="{{ url_for('signup') }}" method="post">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+        <label for="password">Mot de passe</label>
+        <input type="password" name="password" id="password">
+        <input type="hidden" name="csrf" value="{{ csrf }}">
+        <button type="submit">S'inscrire</button>
+        <br>
+        <a href="{{ url_for('signin') }}">Déjà inscrit ?</a>
+    </form>
+{% endblock %}
