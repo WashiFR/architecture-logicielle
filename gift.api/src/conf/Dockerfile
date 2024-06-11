@@ -1,15 +1,8 @@
-FROM ubuntu:kinetic
-LABEL authors="loris"
+# Utiliser une image de base officielle de PHP avec Apache
+FROM php:8.2-apache
 
-ENV DEBIAN_FRONTEND=noninteractive
+# Copier les fichiers de l'application dans le répertoire de l'application dans le conteneur
+COPY src/ /var/www/html/
 
-RUN sed -i 's|http://\([a-z0-9.-]*\)\?archive.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|' /etc/apt/sources.list && \
-    sed -i 's|http://\([a-z0-9.-]*\)\?security.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|' /etc/apt/sources.list && \
-    apt-get update && \
-    ln -fs /usr/share/zoneinfo/Europe/Paris /etc/localtime && \
-    echo "Europe/Paris" > /etc/timezone && \
-    apt-get install -y --no-install-recommends tzdata emacs nano vim php php-common php-json php-mysql && \
-    dpkg-reconfigure --frontend noninteractive tzdata && \
-    apt-get clean
-
-ENTRYPOINT ["top", "-b"]
+# Installer les extensions PHP nécessaires
+RUN docker-php-ext-install pdo pdo_mysql
