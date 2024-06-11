@@ -12,11 +12,11 @@ class Categorie extends Model
 
     public function prestations()
     {
-        return $this->hasMany('gift\appli\core\domain\Prestation', 'cat_id');
+        return $this->hasMany('gift\api\core\domain\Prestation', 'cat_id');
     }
 
     public function box()
     {
-        return $this->belongsToMany('gift\appli\core\domain\Box', 'box2presta', 'presta_id', 'box_id');
+        return $this->belongsToMany('gift\api\core\domain\Box', 'box2presta', 'presta_id', 'box_id');
     }
 }

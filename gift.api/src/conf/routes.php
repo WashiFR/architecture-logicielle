@@ -11,7 +11,7 @@ return function(App $app): App {
     // ### Route de l'Api ###
     $app->get('/api/categories', GetCategoriesAction::class)->setName('api.categories');
     $app->get('/api/prestations', GetPrestationsAction::class)->setName('api.prestations');
-    $app->get('/api/categories/{id}/prestations', GetPrestationsByCatAction::class);
+    $app->get('/api/categories/{id}/prestations', GetPrestationsByCatAction::class)->setName('api.prestationsByCat');
 
     return $app;
 

@@ -24,9 +24,9 @@ class GetPrestationsByCatAction extends AbstractAction
                         "libelle" => $prestation->libelle,
                         "description" => $prestation->description,
                         "unite" => $prestation->unite,
-                        "tarif" => $prestations->tarif,
-                        "img" => $prestations->img,
-                        "id categorie" => $prestations->cat_id
+                        "tarif" => $prestation->tarif,
+                        "img" => $prestation->img,
+                        "id categorie" => $prestation->cat_id
                     ],
                     "links" => [
                         "self" => [
