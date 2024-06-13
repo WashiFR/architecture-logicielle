@@ -20,6 +20,7 @@ class AuthService implements IAuthService
         }
 
         if (password_verify($password, $sql->password)) {
+            $_SESSION['user_id'] = $sql->id;
             $_SESSION['user_role'] = $sql->role;
         } else {
             throw new AuthServiceBadDataException('Erreur 400 : Mauvais mot de passe', 400);
@@ -41,6 +42,7 @@ class AuthService implements IAuthService
         $user->role = User::USER;
         $user->save();
 
+        $_SESSION['user_id'] = $user->id;
         $_SESSION['user_role'] = $user->role;
     }
 }

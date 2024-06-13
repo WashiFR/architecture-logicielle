@@ -19,7 +19,7 @@ class CreateBoxAction extends AbstractAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        if (!isset($_SESSION['user_id'])) {
+        if (!isset($_SESSION['user_role'])) {
             $routeContext = RouteContext::fromRequest($request);
             $url = $routeContext->getRouteParser()->urlFor('signin');
             return $response->withStatus(302)->withHeader('Location', $url);

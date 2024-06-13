@@ -51,15 +51,40 @@ class __TwigTemplate_01ee2221382ef0a0db122ab38f50e76a extends Template
         // line 7
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("prestations"), "html", null, true);
         yield ">Prestations</a></li>
-            <li><a href=";
+            ";
         // line 8
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("categories.create"), "html", null, true);
-        yield ">Créer Catégorie</a></li>
-            <li><a href=";
-        // line 9
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("box.create"), "html", null, true);
-        yield ">Créer Box</a></li>
-        </ul>
+        if ((CoreExtension::getAttribute($this->env, $this->source, ($context["globals"] ?? null), "user_role", [], "any", false, false, false, 8) == 100)) {
+            // line 9
+            yield "                <li><a href=";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("categories.create"), "html", null, true);
+            yield ">Créer Catégorie</a></li>
+            ";
+        }
+        // line 11
+        yield "            ";
+        if ((CoreExtension::getAttribute($this->env, $this->source, ($context["globals"] ?? null), "user_role", [], "any", false, false, false, 11) == null)) {
+            // line 12
+            yield "                <li><a href=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("signin"), "html", null, true);
+            yield "\">Se connecter</a></li>
+            ";
+        } else {
+            // line 14
+            yield "                <li><a href=";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("box.create"), "html", null, true);
+            yield ">Créer Box</a></li>
+                <li><a href=";
+            // line 15
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("boxes"), "html", null, true);
+            yield ">Mes Box</a></li>
+                <li><a href=\"";
+            // line 16
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Slim\Views\TwigRuntimeExtension')->urlFor("signout"), "html", null, true);
+            yield "\">Se déconnecter</a></li>
+            ";
+        }
+        // line 18
+        yield "        </ul>
     </nav>
 </header>";
         return; yield '';
@@ -86,7 +111,7 @@ class __TwigTemplate_01ee2221382ef0a0db122ab38f50e76a extends Template
      */
     public function getDebugInfo()
     {
-        return array (  60 => 9,  56 => 8,  52 => 7,  48 => 6,  44 => 5,  38 => 1,);
+        return array (  87 => 18,  82 => 16,  78 => 15,  73 => 14,  67 => 12,  64 => 11,  58 => 9,  56 => 8,  52 => 7,  48 => 6,  44 => 5,  38 => 1,);
     }
 
     public function getSourceContext()

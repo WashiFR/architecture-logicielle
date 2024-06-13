@@ -33,12 +33,14 @@ class PostNewBoxAction extends AbstractAction
         $token = $data['csrf'] ?? null;
         $libelle = $data['libelle'] ?? null;
         $description = $data['description'] ?? null;
+        $kdo = $data['kdo'] ?? 0;
         $message_kdo = $data['message_kdo'] ?? null;
 
         $box_id = $this->boxService->createBox([
             'token' => $token,
             'libelle' => $libelle,
             'description' => $description,
+            'kdo' => $kdo,
             'message_kdo' => $message_kdo
         ]);
 

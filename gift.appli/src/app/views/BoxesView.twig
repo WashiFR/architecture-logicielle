@@ -1,0 +1,10 @@
+{% extends 'SkeletonView.twig' %}
+
+{% block content %}
+    <h1>Liste de vos box</h1>
+    <ul>
+        {% for box in boxes %}
+            <li><a href="{{ box.url }}">{{ box.libelle }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

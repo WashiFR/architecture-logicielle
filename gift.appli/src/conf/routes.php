@@ -4,10 +4,13 @@ declare(strict_types=1);
 use gift\appli\app\actions\AddPrestationToBoxAction;
 use gift\appli\app\actions\CreateCategorieAction;
 use gift\appli\app\actions\EditPrestationAction;
+use gift\appli\app\actions\GetBoxByIdAction;
+use gift\appli\app\actions\GetBoxesAction;
 use gift\appli\app\actions\GetPrestationsAction;
 use gift\appli\app\actions\PostNewCategorieAction;
 use gift\appli\app\actions\PostSigninAction;
 use gift\appli\app\actions\PostSignupAction;
+use gift\appli\app\actions\RemovePrestationFromBoxAction;
 use gift\appli\app\actions\ShowHomeAction;
 use gift\appli\app\actions\SigninAction;
 use gift\appli\app\actions\SignoutAction;
@@ -37,10 +40,13 @@ return function(App $app): App {
     $app->get('/prestation/edit', EditPrestationAction::class)->setName('prestation.edit');
     $app->post('/prestation/edit', UpdatePrestationAction::class)->setName('prestation.edit');
     $app->post('/prestation/addToBox', AddPrestationToBoxAction::class)->setName('prestation.addToBox');
+    $app->post('/prestation/removeFromBox', RemovePrestationFromBoxAction::class)->setName('prestation.removeFromBox');
 
     // ### Routes de Box ###
     $app->get('/box/create', CreateBoxAction::class)->setName('box.create');
     $app->post('/box/create', PostNewBoxAction::class)->setName('box.create');
+    $app->get('/boxes', GetBoxesAction::class)->setName('boxes');
+    $app->get('/box', GetBoxByIdAction::class)->setName('box');
 
     // ### Routes de Connexion ###
     $app->get('/signin', SigninAction::class)->setName('signin');

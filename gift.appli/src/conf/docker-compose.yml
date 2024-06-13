@@ -1,15 +1,21 @@
+networks:
+  gift:
+    driver: bridge
+
 services:
   php:
-    image: gaetan267/giftbox_image:latest
+    image: canals/php:latest
     container_name: php-container
     ports:
       - "14100:80"
     depends_on:
-      - sql
+      - mysql
+    networks:
+      - gift
 
-  sql:
+  mysql:
     image: mariadb:latest
-    container_name: sql-container
+    container_name: mysql-container
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
@@ -17,13 +23,16 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     ports:
       - "14101:3306"
+    networks:
+      - gift
 
-  adminer:
-    image: adminer:latest
-    command:
-      - php -S 0.0.0.0:8080 -t /var/www/html
-    container_name: adminer-container
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-container
+    environment:
+      PMA_HOST: mysql-container
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
-      - "14102:8080"
-    depends_on:
-      - sql
+      - "14102:80"
+    networks:
+      - gift

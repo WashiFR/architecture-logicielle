@@ -37,6 +37,6 @@ class GetCategoriesAction extends AbstractAction
             $sql[$i]['url'] = $routeParser->urlFor('categorie', ['id' => $sql[$i]['id']]);
         }
 
-        return $view->render($response, 'CategoriesView.twig', ['categories' => $sql]);
+        return $view->render($response, $this->template, ['categories' => $sql]);
     }
 }

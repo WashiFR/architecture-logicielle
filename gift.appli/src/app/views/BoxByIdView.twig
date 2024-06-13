@@ -1,0 +1,23 @@
+{% extends 'SkeletonView.twig' %}
+
+{% block content %}
+    {% for box in boxes %}
+        <h1>Box {{ box.libelle }}</h1>
+        <p>{{ box.description }}</p>
+        <p>{{ box.montant }} €</p>
+        <p>{{ box.message_kdo }}</p>
+        <h2>Liste des prestations de la box</h2>
+        <ul>
+            {% for prestation in prestations %}
+                <li>
+                    <a href="{{ prestation.url }}">{{ prestation.libelle }}</a> : {{ prestation.tarif }}€
+                    <form action="{{ url_for('prestation.removeFromBox') }}" method="post">
+                        <input type="hidden" name="presta_id" value="{{ prestation.id }}">
+                        <input type="hidden" name="box_id" value="{{ box.id }}">
+                        <button type="submit">Enlever de la box</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+{% endblock %}

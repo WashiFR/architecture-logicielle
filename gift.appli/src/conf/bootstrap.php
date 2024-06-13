@@ -18,6 +18,7 @@ $twig = Twig::create(__DIR__ . '/../app/views', [
 
 $twig->getEnvironment()->addGlobal('globals', [
     'img_dir' => '../src/img/',
+    'user_id' => $_SESSION['user_id'] ?? null,
     'user_role' => $_SESSION['user_role'] ?? null
 ]);
 
