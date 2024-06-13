@@ -9,13 +9,13 @@ services:
     ports:
       - "14100:80"
     depends_on:
-      - mysql
+      - mariadb
     networks:
       - gift
 
-  mysql:
+  mariadb:
     image: mariadb:latest
-    container_name: mysql-container
+    container_name: mariadb-container
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
@@ -30,7 +30,7 @@ services:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin-container
     environment:
-      PMA_HOST: mysql-container
+      PMA_HOST: mariadb-container
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - "14102:80"
