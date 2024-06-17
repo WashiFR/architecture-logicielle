@@ -1,0 +1,42 @@
+networks:
+  giftbox:
+    driver: bridge
+
+services:
+  php:
+    image: canals/php:latest
+    container_name: php-container
+    ports:
+      - "14100:80"
+    depends_on:
+      - sql
+    volumes:
+      - ./public:/var/www/html
+      - ./src:/var/www/src
+    networks:
+      - giftbox
+
+  sql:
+    image: mariadb:latest
+    container_name: sql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "14101:3306"
+    networks:
+      - giftbox
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmine-container
+    environment:
+      PMA_HOST: sql-container
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "14102:80"
+    networks:
+      - giftbox
