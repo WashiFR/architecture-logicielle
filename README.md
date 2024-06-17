@@ -10,4 +10,4 @@ UML : https://dbdiagram.io/d/giftbox-65cf3b45ac844320ae4ba73b
 
 * Appli : http://docketu.iutnc.univ-lorraine.fr:14100
 * Api : 
-* BD : http://docketu.iutnc.univ-lorraine.fr:14102/index.php?route=/table/structure&db=giftbox&table=box
+* BD : http://docketu.iutnc.univ-lorraine.fr:14102
