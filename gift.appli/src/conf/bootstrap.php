@@ -11,10 +11,7 @@ $app = AppFactory::create();
 Eloquent::init(__DIR__ . '/conf.ini');
 
 // Twig
-$twig = Twig::create(__DIR__ . '/../app/views', [
-    'cache' => __DIR__ . '/cache',
-    'auto_reload' => true
-]);
+$twig = Twig::create(__DIR__ . '/../app/views', ['cache' => false]);
 
 $twig->getEnvironment()->addGlobal('globals', [
     'img_dir' => '../src/img/',
@@ -26,7 +23,7 @@ $app->add(TwigMiddleware::create($app, $twig));
 
 $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, false, false);
-$app->setBasePath('/gift.appli/public');
+//$app->setBasePath('/gift.appli/public');
 
 $app=(require_once __DIR__ . '/routes.php')($app);
 

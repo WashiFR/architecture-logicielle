@@ -5,11 +5,14 @@ networks:
 services:
   php:
     image: canals/php:latest
-    container_name: php-container
+    container_name: php-container2
     ports:
       - "14100:80"
     depends_on:
       - mariadb
+    volumes:
+      - ./public:/var/www/html
+      - ./src:/var/www/src
     networks:
       - gift
 
@@ -28,7 +31,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin-container
+    container_name: phpmyadmin-container2
     environment:
       PMA_HOST: mariadb-container
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
